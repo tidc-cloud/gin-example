@@ -1,0 +1,11 @@
+name: Portal CI
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  include:
+    name: Portal ci
+    uses: tidc-cloud/devops-app-ci/.github/workflows/portal-ci-v2.yml@main
+    with:
+      image: gin-example
