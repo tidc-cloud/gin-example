@@ -8,9 +8,16 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+RUN CGO_ENABLED=0 GOOS=linux go build -o docker-gs-ping
+
+
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/docker-gs-ping ./docker-gs-ping
 
 EXPOSE 8080
 
-CMD ["/docker-gs-ping"]
+CMD ["/app/docker-gs-ping"]
 
